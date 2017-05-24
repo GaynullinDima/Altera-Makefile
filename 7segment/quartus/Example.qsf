@@ -36,12 +36,12 @@
 # -------------------------------------------------------------------------- #
 
 
-set_global_assignment -name FAMILY "Cyclone II"
-set_global_assignment -name DEVICE EP2C5T144C8
+set_global_assignment -name FAMILY "Cyclone IV E"
+set_global_assignment -name DEVICE EP4CE6E22C8
 set_global_assignment -name TOP_LEVEL_ENTITY countpro
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION "13.0 SP1"
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "18:55:57  APRIL 23, 2017"
-set_global_assignment -name LAST_QUARTUS_VERSION "13.0 SP1"
+set_global_assignment -name LAST_QUARTUS_VERSION "17.0.0 Lite Edition"
 
 set_global_assignment -name SOURCE_FILE ../fpga/countpro.v
 
@@ -140,18 +140,7 @@ set_global_assignment -name SOURCE_FILE ../fpga/countpro.v
 
 # These are the pin assignments for the Altera Mini Board
 
-set_location_assignment PIN_112 -to 7segment[0]
-set_location_assignment PIN_113 -to 7segment[1]
-set_location_assignment PIN_114 -to 7segment[2]
-set_location_assignment PIN_115 -to 7segment[3]
-set_location_assignment PIN_118 -to 7segment[4]
-set_location_assignment PIN_119 -to 7segment[5]
-set_location_assignment PIN_120 -to 7segment[6]
 
-set_location_assignment PIN_135 -to 7cathod[0]
-set_location_assignment PIN_134 -to 7cathod[1]
-set_location_assignment PIN_133 -to 7cathod[2]
-set_location_assignment PIN_132 -to 7cathod[3]
 
 
 # These are the pin assignments for the Altera Mini Board
@@ -380,21 +369,36 @@ set_location_assignment PIN_132 -to 7cathod[3]
 
 
 # These are the pin assignments for the Altera Mini Board
-set_location_assignment PIN_3 -to led[0]
-set_location_assignment PIN_7 -to led[1]
-set_location_assignment PIN_9 -to led[2]
-set_location_assignment PIN_17 -to sys_clk
-set_location_assignment PIN_144 -to key
 
-set_location_assignment PIN_112 -to ssegment[0]
-set_location_assignment PIN_113 -to ssegment[1]
-set_location_assignment PIN_114 -to ssegment[2]
-set_location_assignment PIN_115 -to ssegment[3]
-set_location_assignment PIN_118 -to ssegment[4]
-set_location_assignment PIN_119 -to ssegment[5]
-set_location_assignment PIN_120 -to ssegment[6]
 
-set_location_assignment PIN_135 -to scathod[0]
-set_location_assignment PIN_134 -to scathod[1]
-set_location_assignment PIN_133 -to scathod[2]
-set_location_assignment PIN_132 -to scathod[3]
+
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_location_assignment PIN_106 -to VGA_RED
+set_location_assignment PIN_105 -to VGA_GREEN
+set_location_assignment PIN_104 -to VGA_BLUE
+set_location_assignment PIN_101 -to VGA_HSYNC
+set_location_assignment PIN_103 -to VGA_VSYNC
+set_location_assignment PIN_23 -to CLK_50MHZ
+set_location_assignment PIN_87 -to leds[3]
+set_location_assignment PIN_86 -to leds[2]
+set_location_assignment PIN_85 -to leds[1]
+set_location_assignment PIN_84 -to leds[0]
+set_location_assignment PIN_88 -to btns[3]
+set_location_assignment PIN_89 -to btns[2]
+set_location_assignment PIN_90 -to btns[1]
+set_location_assignment PIN_91 -to btns[0]
+set_global_assignment -name ENABLE_OCT_DONE OFF
+set_global_assignment -name ENABLE_CONFIGURATION_PINS OFF
+set_global_assignment -name ENABLE_BOOT_SEL_PIN OFF
+set_global_assignment -name CYCLONEIII_CONFIGURATION_SCHEME "PASSIVE SERIAL"
+set_global_assignment -name STRATIXV_CONFIGURATION_SCHEME "PASSIVE SERIAL"
+set_global_assignment -name USE_CONFIGURATION_DEVICE OFF
+set_global_assignment -name CRC_ERROR_OPEN_DRAIN OFF
+set_global_assignment -name RESERVE_DATA1_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_global_assignment -name RESERVE_FLASH_NCE_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -rise
+set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -fall
+set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -rise
+set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -fall
+set_global_assignment -name CYCLONEII_RESERVE_NCEO_AFTER_CONFIGURATION "USE AS REGULAR IO"

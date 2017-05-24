@@ -11,8 +11,8 @@ ASSIGNMENT_FILES = $(PROJECT).qpf $(PROJECT).qsf
 
 ###################################################################
 # Part, Family, Boardfile DE1 or DE2
-FAMILY = "Cyclone II"
-PART = EP2C5T144C8
+FAMILY = "Cyclone IV"
+PART = EP4CE6E22C8
 BOARDFILE = MiniDev2Pins
 ###################################################################
 

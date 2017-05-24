@@ -1,80 +1,166 @@
-module countpro(sys_clk, led, key, scathod, ssegment);
+`timescale 1ns / 1ps
 
-input sys_clk;
-input key;
-output [2:0] led;
-output reg [6:0] ssegment;
-output reg [3:0] scathod;
-reg [16:0] count;
-reg [2:0] led;
-reg [3:0] digit[4];
-reg [12:0] dyn_indic_count;
-reg [1:0] showing_digit;
+module countpro(
+    output VGA_RED,
+    output VGA_GREEN,
+    output VGA_BLUE,
+    output VGA_HSYNC,
+    output VGA_VSYNC,
+	 output [3:0] leds,
+	 input  [3:0] btns,
+	 input  CLK_50MHZ
+    );
 
-always @(posedge sys_clk)
+// My development board had a 50MHz clock.
+// The original code was for a board with a 25MHz clock.
+// This section divides CLK_50MHZ by 2 and outputs clk.
+reg clk;
+always @(posedge CLK_50MHZ)
+clk <= ~clk;
+
+wire inDisplayArea;
+wire [9:0] CounterX;
+wire [8:0] CounterY;
+
+VidSync_Gen syncgen(.clk(clk), .VGA_HSYNC(VGA_HSYNC), .VGA_VSYNC(VGA_VSYNC), 
+  .inDisplayArea(inDisplayArea), .CounterX(CounterX), .CounterY(CounterY));
+
+/////////////////////////////////////////////////////////////////
+reg [9:0] PaddlePosition, AutoPaddlePosition;
+
+always @(posedge clk)
+if(btns[0] ^ btns[1])
 begin
-        count <= count + 1;
-        if (count == 16'b1111_1111_1111_1110)
-        begin
-                led[2] = led[2] ^ 1'b1;
-                if (digit[1] == 4'hf && digit[2] == 4'hf && digit[3] == 4'hf)
-                begin
-                        digit[0] = digit[0] + 1;
-                end
-                if (digit[2] == 4'hf && digit[3] == 4'hf)
-                begin
-                        digit[1] = digit[1] + 1;
-                end
-                if (digit[3] == 4'hf)
-                begin
-                        digit[2] = digit[2] + 1;
-                end
-                digit[3] = digit[3] + 1;
-        end
+	if(btns[0])
+	begin
+		if(~&PaddlePosition)        // make sure the value doesn't overflow
+			PaddlePosition <= PaddlePosition + 1;
+	end
+	else
+	begin
+		if(|PaddlePosition)        // make sure the value doesn't underflow
+			PaddlePosition <= PaddlePosition - 1;
+	end
 end
 
-always @(negedge key)
-begin
-        led[1] = led[1] ^ 1'b1;
-end
+/////////////////////////////////////////////////////////////////
+reg [9:0] ballX;
+reg [8:0] ballY;
+reg ball_inX, ball_inY;
+
+always @(posedge clk)
+if(ball_inX==0) ball_inX <= (CounterX==ballX) & ball_inY; else ball_inX <= !(CounterX==ballX+16);
+
+always @(posedge clk)
+if(ball_inY==0) ball_inY <= (CounterY==ballY); else ball_inY <= !(CounterY==ballY+16);
+
+wire ball = ball_inX & ball_inY;
+
+/////////////////////////////////////////////////////////////////
+// These sections were modified by GS to A) better fit my screen and B) provide automatic paddle control.
+// Draw a border around the screen                //79
+wire border = (CounterX[9:3]==0) || (CounterX[9:3]==72) || (CounterY[8:3]==0) || (CounterY[8:3]==59);
+wire manualpaddle = (CounterX>=PaddlePosition+8) && (CounterX<=PaddlePosition+120) && (CounterY[8:4]==27);
+wire autopaddle = (CounterX>=(AutoPaddlePosition-60)+8) && (CounterX<=(AutoPaddlePosition-60)+120) && (CounterY[8:4]==27);
+wire paddle = (0 ? (autopaddle) : manualpaddle); // select based on SW_0
+wire BouncingObject = border | paddle; // active if the border or paddle is redrawing itself
+
+reg ball_dirX, ball_dirY;
+reg ResetCollision;
+always @(posedge clk) ResetCollision <= (CounterY==500) & (CounterX==0);  // active only once for every video frame
+
+reg CollisionX1, CollisionX2, CollisionY1, CollisionY2;
+always @(posedge clk) if(ResetCollision) CollisionX1<=0; else if(BouncingObject & (CounterX==ballX   ) & (CounterY==ballY+ 8)) CollisionX1<=1;
+always @(posedge clk) if(ResetCollision) CollisionX2<=0; else if(BouncingObject & (CounterX==ballX+16) & (CounterY==ballY+ 8)) CollisionX2<=1;
+always @(posedge clk) if(ResetCollision) CollisionY1<=0; else if(BouncingObject & (CounterX==ballX+ 8) & (CounterY==ballY   )) CollisionY1<=1;
+always @(posedge clk) if(ResetCollision) CollisionY2<=0; else if(BouncingObject & (CounterX==ballX+ 8) & (CounterY==ballY+16)) CollisionY2<=1;
+
+// Output assigns for LEDs
+assign leds[0] = CollisionX1;
+assign leds[1] = CollisionX2;
+assign leds[2] = btns[0];
+assign leds[3] = btns[1];
 
 
-/*
- * Module to show digits, those are placed in the digit regs.
- */
-always @(posedge sys_clk)
+/////////////////////////////////////////////////////////////////
+wire UpdateBallPosition = ResetCollision;  // update the ball position at the same time that we reset the collision detectors
+
+always @(posedge clk)
+if(UpdateBallPosition) // only update ball if SW_3 allows.
 begin
-        dyn_indic_count <= dyn_indic_count + 1;
-        if (dyn_indic_count == 12'b1111_11111111)
-        begin
-                ssegment = 7'b0000000;
-                case (showing_digit)
-                2'b00: scathod = ~4'b0001;
-                2'b01: scathod = ~4'b0010;
-                2'b10: scathod = ~4'b0100;
-                2'b11: scathod = ~4'b1000;
-                endcase
-                case (digit[showing_digit])
-                //                  GFEDCBA
-                4'h0: ssegment = 7'b0111111;
-                4'h1: ssegment = 7'b0000110;
-                4'h2: ssegment = 7'b1011011;
-                4'h3: ssegment = 7'b1001111;
-                4'h4: ssegment = 7'b1100110;
-                4'h5: ssegment = 7'b1101101;
-                4'h6: ssegment = 7'b1111101;
-                4'h7: ssegment = 7'b0000111;
-                4'h8: ssegment = 7'b1111111;
-                4'h9: ssegment = 7'b1101111;
-                4'ha: ssegment = 7'b1110111;
-                4'hb: ssegment = 7'b1111100;
-                4'hc: ssegment = 7'b1111001;
-                4'hd: ssegment = 7'b1011110;
-                4'he: ssegment = 7'b1111001;
-                4'hf: ssegment = 7'b1110001;
-                endcase
-                showing_digit = showing_digit + 1;
-        end
+	if(~(CollisionX1 & CollisionX2))        // if collision on both X-sides, don't move in the X direction
+	begin
+		ballX <= ballX + (ball_dirX ? (-3 ) : (3));  // Speed set by SW_1
+		if(CollisionX2) ball_dirX <= 1; else if(CollisionX1) ball_dirX <= 0;
+	end
+
+	if(~(CollisionY1 & CollisionY2))        // if collision on both Y-sides, don't move in the Y direction
+	begin
+		ballY <= ballY + (ball_dirY ? (-3 ) : (3)); // Speed set by SW_1
+		if(CollisionY2) ball_dirY <= 1; else if(CollisionY1) ball_dirY <= 0;
+	end
+	
+	AutoPaddlePosition <= ((ballX<=60) ? 60 : (ballX>=520) ? 520 : ballX);  // Don't let autopaddle drive off screen edge!
+end 
+
+/////////////////////////////////////////////////////////////////
+
+// Set colour scheme based on SW_2
+wire R = ((~btns[3] & (border | paddle | ball)) | (btns[3] & (border | paddle)));
+wire G = ((~btns[3] & (border | paddle | ball)) | (btns[3] & (border)));
+wire B = ((~btns[3] & (border | paddle | ball)) | (btns[3] & (ball)));
+
+reg VGA_R, VGA_G, VGA_B;
+
+assign VGA_RED   = VGA_R;
+assign VGA_GREEN = VGA_G;
+assign VGA_BLUE  = VGA_B;
+
+always @(posedge clk)
+begin
+  VGA_R <= R & inDisplayArea;
+  VGA_G <= G & inDisplayArea;
+  VGA_B <= B & inDisplayArea;
 end
+
+endmodule
+
+module VidSync_Gen(clk, VGA_HSYNC, VGA_VSYNC, inDisplayArea, CounterX, CounterY);
+input clk;
+output VGA_HSYNC, VGA_VSYNC;
+output inDisplayArea;
+output [9:0] CounterX;
+output [8:0] CounterY;
+
+//////////////////////////////////////////////////
+reg [9:0] CounterX;
+reg [8:0] CounterY;
+wire CounterXmaxed = (CounterX==10'h2FF);
+
+always @(posedge clk)
+if(CounterXmaxed)
+	CounterX <= 0;
+else
+	CounterX <= CounterX + 1;
+
+always @(posedge clk)
+if(CounterXmaxed) CounterY <= CounterY + 1;
+
+reg	vga_HS, vga_VS;
+always @(posedge clk)
+begin
+	vga_HS <= (CounterX[9:4]==6'h28); // change this value to move the display horizontally (WAS 2D)
+	vga_VS <= (CounterY==479); // change this value to move the display vertically (WAS 500)
+end
+
+reg inDisplayArea;
+always @(posedge clk)
+if(inDisplayArea==0)
+	inDisplayArea <= (CounterXmaxed) && (CounterY<480);
+else
+	inDisplayArea <= !(CounterX==639);
+	
+assign VGA_HSYNC = ~vga_HS;
+assign VGA_VSYNC = ~vga_VS;
 
 endmodule

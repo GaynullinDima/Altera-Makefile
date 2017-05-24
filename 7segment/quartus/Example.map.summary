@@ -1,13 +1,13 @@
-Analysis & Synthesis Status : Successful - Sun May  7 00:09:39 2017
-Quartus II 32-bit Version : 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition
+Analysis & Synthesis Status : Successful - Thu May 25 02:46:33 2017
+Quartus Prime Version : 17.0.0 Build 595 04/25/2017 SJ Lite Edition
 Revision Name : Example
 Top-level Entity Name : countpro
-Family : Cyclone II
-Total logic elements : 68
-    Total combinational functions : 68
-    Dedicated logic registers : 47
-Total registers : 47
-Total pins : 16
+Family : Cyclone IV E
+Total logic elements : 194
+    Total combinational functions : 194
+    Dedicated logic registers : 64
+Total registers : 64
+Total pins : 14
 Total virtual pins : 0
 Total memory bits : 0
 Embedded Multiplier 9-bit elements : 0

@@ -1,28 +1,29 @@
 Info: *******************************************************************
-Info: Running Quartus II 32-bit Shell
-    Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Copyright (C) 1991-2013 Altera Corporation. All rights reserved.
-    Info: Your use of Altera Corporation's design tools, logic functions 
+Info: Running Quartus Prime Shell
+    Info: Version 17.0.0 Build 595 04/25/2017 SJ Lite Edition
+    Info: Copyright (C) 2017  Intel Corporation. All rights reserved.
+    Info: Your use of Intel Corporation's design tools, logic functions 
     Info: and other software and tools, and its AMPP partner logic 
     Info: functions, and any output files from any of the foregoing 
     Info: (including device programming or simulation files), and any 
     Info: associated documentation or information are expressly subject 
-    Info: to the terms and conditions of the Altera Program License 
-    Info: Subscription Agreement, Altera MegaCore Function License 
-    Info: Agreement, or other applicable license agreement, including, 
-    Info: without limitation, that your use is for the sole purpose of 
-    Info: programming logic devices manufactured by Altera and sold by 
-    Info: Altera or its authorized distributors.  Please refer to the 
-    Info: applicable agreement for further details.
-    Info: Processing started: Sun May  7 00:09:35 2017
+    Info: to the terms and conditions of the Intel Program License 
+    Info: Subscription Agreement, the Intel Quartus Prime License Agreement,
+    Info: the Intel MegaCore Function License Agreement, or other 
+    Info: applicable license agreement, including, without limitation, 
+    Info: that your use is for the sole purpose of programming logic 
+    Info: devices manufactured by Intel and sold by Intel or its 
+    Info: authorized distributors.  Please refer to the applicable 
+    Info: agreement for further details.
+    Info: Processing started: Thu May 25 02:47:43 2017
 Info: Command: quartus_sh --determine_smart_action Example
 Info: Quartus(args): Example
-Info (293032): Detected changes in source files.
-    Info (293027): Source file: /home/edos/localGIT/Altera-Makefile/fpga/countpro.v has changed.
-Info: SMART_ACTION = SOURCE
-Info (23030): Evaluation of Tcl script /home/maxwell/altera/13.0sp1/quartus/common/tcl/internal/qsh_smart.tcl was successful
-Info: Quartus II 32-bit Shell was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 132 megabytes
-    Info: Processing ended: Sun May  7 00:09:35 2017
-    Info: Elapsed time: 00:00:00
-    Info: Total CPU time (on all processors): 00:00:00
+Info (293031): Detected changes in Quartus Prime Settings File (.qsf).
+    Info (293029): New assignment CYCLONEII_RESERVE_NCEO_AFTER_CONFIGURATION with value USE AS REGULAR IO has been added.
+Info: SMART_ACTION = FIT
+Info (23030): Evaluation of Tcl script /home/k33p/intelFPGA_lite/17.0/quartus/common/tcl/internal/qsh_smart.tcl was successful
+Info: Quartus Prime Shell was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 801 megabytes
+    Info: Processing ended: Thu May 25 02:47:45 2017
+    Info: Elapsed time: 00:00:02
+    Info: Total CPU time (on all processors): 00:00:01

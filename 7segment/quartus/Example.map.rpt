@@ -1,6 +1,6 @@
 Analysis & Synthesis report for Example
-Sun May  7 00:09:39 2017
-Quartus II 32-bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+Thu May 25 02:46:33 2017
+Quartus Prime Version 17.0.0 Build 595 04/25/2017 SJ Lite Edition
 
 
 ---------------------
@@ -13,52 +13,51 @@ Quartus II 32-bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edit
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. Registers Removed During Synthesis
-  9. General Register Statistics
- 10. Multiplexer Restructuring Statistics (Restructuring Performed)
- 11. Elapsed Time Per Partition
- 12. Analysis & Synthesis Messages
- 13. Analysis & Synthesis Suppressed Messages
+  8. General Register Statistics
+  9. Post-Synthesis Netlist Statistics for Top Partition
+ 10. Elapsed Time Per Partition
+ 11. Analysis & Synthesis Messages
 
 
 
 ----------------
 ; Legal Notice ;
 ----------------
-Copyright (C) 1991-2013 Altera Corporation
-Your use of Altera Corporation's design tools, logic functions 
+Copyright (C) 2017  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
 and other software and tools, and its AMPP partner logic 
 functions, and any output files from any of the foregoing 
 (including device programming or simulation files), and any 
 associated documentation or information are expressly subject 
-to the terms and conditions of the Altera Program License 
-Subscription Agreement, Altera MegaCore Function License 
-Agreement, or other applicable license agreement, including, 
-without limitation, that your use is for the sole purpose of 
-programming logic devices manufactured by Altera and sold by 
-Altera or its authorized distributors.  Please refer to the 
-applicable agreement for further details.
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel MegaCore Function License Agreement, or other 
+applicable license agreement, including, without limitation, 
+that your use is for the sole purpose of programming logic 
+devices manufactured by Intel and sold by Intel or its 
+authorized distributors.  Please refer to the applicable 
+agreement for further details.
 
 
 
-+--------------------------------------------------------------------------------------+
-; Analysis & Synthesis Summary                                                         ;
-+------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sun May  7 00:09:39 2017           ;
-; Quartus II 32-bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
-; Revision Name                      ; Example                                         ;
-; Top-level Entity Name              ; countpro                                        ;
-; Family                             ; Cyclone II                                      ;
-; Total logic elements               ; 68                                              ;
-;     Total combinational functions  ; 68                                              ;
-;     Dedicated logic registers      ; 47                                              ;
-; Total registers                    ; 47                                              ;
-; Total pins                         ; 16                                              ;
-; Total virtual pins                 ; 0                                               ;
-; Total memory bits                  ; 0                                               ;
-; Embedded Multiplier 9-bit elements ; 0                                               ;
-; Total PLLs                         ; 0                                               ;
-+------------------------------------+-------------------------------------------------+
++----------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                     ;
++------------------------------------+---------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Thu May 25 02:46:33 2017       ;
+; Quartus Prime Version              ; 17.0.0 Build 595 04/25/2017 SJ Lite Edition ;
+; Revision Name                      ; Example                                     ;
+; Top-level Entity Name              ; countpro                                    ;
+; Family                             ; Cyclone IV E                                ;
+; Total logic elements               ; 194                                         ;
+;     Total combinational functions  ; 194                                         ;
+;     Dedicated logic registers      ; 64                                          ;
+; Total registers                    ; 64                                          ;
+; Total pins                         ; 14                                          ;
+; Total virtual pins                 ; 0                                           ;
+; Total memory bits                  ; 0                                           ;
+; Embedded Multiplier 9-bit elements ; 0                                           ;
+; Total PLLs                         ; 0                                           ;
++------------------------------------+---------------------------------------------+
 
 
 +----------------------------------------------------------------------------------------------------------------------+
@@ -66,16 +65,16 @@ applicable agreement for further details.
 +----------------------------------------------------------------------------+--------------------+--------------------+
 ; Option                                                                     ; Setting            ; Default Value      ;
 +----------------------------------------------------------------------------+--------------------+--------------------+
-; Device                                                                     ; EP2C5T144C8        ;                    ;
+; Device                                                                     ; EP4CE6E22C8        ;                    ;
 ; Top-level entity name                                                      ; countpro           ; Example            ;
-; Family name                                                                ; Cyclone II         ; Cyclone IV GX      ;
+; Family name                                                                ; Cyclone IV E       ; Cyclone V          ;
 ; Use smart compilation                                                      ; Off                ; Off                ;
 ; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
 ; Enable compact report table                                                ; Off                ; Off                ;
 ; Restructure Multiplexers                                                   ; Auto               ; Auto               ;
 ; Create Debugging Nodes for IP Cores                                        ; Off                ; Off                ;
 ; Preserve fewer node names                                                  ; On                 ; On                 ;
-; Disable OpenCore Plus hardware evaluation                                  ; Off                ; Off                ;
+; OpenCore Plus hardware evaluation                                          ; Enable             ; Enable             ;
 ; Verilog Version                                                            ; Verilog_2001       ; Verilog_2001       ;
 ; VHDL Version                                                               ; VHDL_1993          ; VHDL_1993          ;
 ; State Machine Processing                                                   ; Auto               ; Auto               ;
@@ -107,12 +106,14 @@ applicable agreement for further details.
 ; Perform WYSIWYG Primitive Resynthesis                                      ; Off                ; Off                ;
 ; Auto ROM Replacement                                                       ; On                 ; On                 ;
 ; Auto RAM Replacement                                                       ; On                 ; On                 ;
+; Auto DSP Block Replacement                                                 ; On                 ; On                 ;
 ; Auto Shift Register Replacement                                            ; Auto               ; Auto               ;
 ; Allow Shift Register Merging across Hierarchies                            ; Auto               ; Auto               ;
 ; Auto Clock Enable Replacement                                              ; On                 ; On                 ;
 ; Strict RAM Replacement                                                     ; Off                ; Off                ;
 ; Allow Synchronous Control Signals                                          ; On                 ; On                 ;
 ; Force Use of Synchronous Clear Signals                                     ; Off                ; Off                ;
+; Auto RAM Block Balancing                                                   ; On                 ; On                 ;
 ; Auto RAM to Logic Cell Conversion                                          ; Off                ; Off                ;
 ; Auto Resource Sharing                                                      ; Off                ; Off                ;
 ; Allow Any RAM Size For Recognition                                         ; Off                ; Off                ;
@@ -120,13 +121,13 @@ applicable agreement for further details.
 ; Allow Any Shift Register Size For Recognition                              ; Off                ; Off                ;
 ; Use LogicLock Constraints during Resource Balancing                        ; On                 ; On                 ;
 ; Ignore translate_off and synthesis_off directives                          ; Off                ; Off                ;
-; Timing-Driven Synthesis                                                    ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                    ; On                 ; On                 ;
 ; Report Parameter Settings                                                  ; On                 ; On                 ;
 ; Report Source Assignments                                                  ; On                 ; On                 ;
 ; Report Connectivity Checks                                                 ; On                 ; On                 ;
 ; Ignore Maximum Fan-Out Assignments                                         ; Off                ; Off                ;
 ; Synchronization Register Chain Length                                      ; 2                  ; 2                  ;
-; PowerPlay Power Optimization                                               ; Normal compilation ; Normal compilation ;
+; PowerPlay Power Optimization During Synthesis                              ; Normal compilation ; Normal compilation ;
 ; HDL message level                                                          ; Level2             ; Level2             ;
 ; Suppress Register Optimization Related Messages                            ; Off                ; Off                ;
 ; Number of Removed Registers Reported in Synthesis Report                   ; 5000               ; 5000               ;
@@ -142,91 +143,76 @@ applicable agreement for further details.
 ; Analysis & Synthesis Message Level                                         ; Medium             ; Medium             ;
 ; Disable Register Merging Across Hierarchies                                ; Auto               ; Auto               ;
 ; Resource Aware Inference For Block RAM                                     ; On                 ; On                 ;
-; Synthesis Seed                                                             ; 1                  ; 1                  ;
 +----------------------------------------------------------------------------+--------------------+--------------------+
 
 
-Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
-+-------------------------------------+
-; Parallel Compilation                ;
-+----------------------------+--------+
-; Processors                 ; Number ;
-+----------------------------+--------+
-; Number detected on machine ; 4      ;
-; Maximum allowed            ; 1      ;
-+----------------------------+--------+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 2           ;
+; Maximum allowed            ; 2           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 2           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processor 2            ;   0.0%      ;
++----------------------------+-------------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                      ;
-+----------------------------------+-----------------+------------------------+-----------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                        ; Library ;
-+----------------------------------+-----------------+------------------------+-----------------------------------------------------+---------+
-; ../fpga/countpro.v               ; yes             ; User Verilog HDL File  ; /home/edos/localGIT/Altera-Makefile/fpga/countpro.v ;         ;
-+----------------------------------+-----------------+------------------------+-----------------------------------------------------+---------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                              ;
++----------------------------------+-----------------+------------------------+-------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                                ; Library ;
++----------------------------------+-----------------+------------------------+-------------------------------------------------------------+---------+
+; ../fpga/countpro.v               ; yes             ; User Verilog HDL File  ; /home/k33p/Project/Altera-Makefile/7segment/fpga/countpro.v ;         ;
++----------------------------------+-----------------+------------------------+-------------------------------------------------------------+---------+
 
 
-+-------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary           ;
-+---------------------------------------------+---------+
-; Resource                                    ; Usage   ;
-+---------------------------------------------+---------+
-; Estimated Total logic elements              ; 68      ;
-;                                             ;         ;
-; Total combinational functions               ; 68      ;
-; Logic element usage by number of LUT inputs ;         ;
-;     -- 4 input functions                    ; 30      ;
-;     -- 3 input functions                    ; 10      ;
-;     -- <=2 input functions                  ; 28      ;
-;                                             ;         ;
-; Logic elements by mode                      ;         ;
-;     -- normal mode                          ; 53      ;
-;     -- arithmetic mode                      ; 15      ;
-;                                             ;         ;
-; Total registers                             ; 47      ;
-;     -- Dedicated logic registers            ; 47      ;
-;     -- I/O registers                        ; 0       ;
-;                                             ;         ;
-; I/O pins                                    ; 16      ;
-; Embedded Multiplier 9-bit elements          ; 0       ;
-; Maximum fan-out node                        ; sys_clk ;
-; Maximum fan-out                             ; 46      ;
-; Total fan-out                               ; 321     ;
-; Average fan-out                             ; 2.45    ;
-+---------------------------------------------+---------+
++-----------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary         ;
++---------------------------------------------+-------+
+; Resource                                    ; Usage ;
++---------------------------------------------+-------+
+; Estimated Total logic elements              ; 194   ;
+;                                             ;       ;
+; Total combinational functions               ; 194   ;
+; Logic element usage by number of LUT inputs ;       ;
+;     -- 4 input functions                    ; 65    ;
+;     -- 3 input functions                    ; 59    ;
+;     -- <=2 input functions                  ; 70    ;
+;                                             ;       ;
+; Logic elements by mode                      ;       ;
+;     -- normal mode                          ; 101   ;
+;     -- arithmetic mode                      ; 93    ;
+;                                             ;       ;
+; Total registers                             ; 64    ;
+;     -- Dedicated logic registers            ; 64    ;
+;     -- I/O registers                        ; 0     ;
+;                                             ;       ;
+; I/O pins                                    ; 14    ;
+;                                             ;       ;
+; Embedded Multiplier 9-bit elements          ; 0     ;
+;                                             ;       ;
+; Maximum fan-out node                        ; clk   ;
+; Maximum fan-out                             ; 64    ;
+; Total fan-out                               ; 750   ;
+; Average fan-out                             ; 2.62  ;
++---------------------------------------------+-------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                         ;
-+----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
-; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name ; Library Name ;
-+----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
-; |countpro                  ; 68 (68)           ; 47 (47)      ; 0           ; 0            ; 0       ; 0         ; 16   ; 0            ; |countpro           ; work         ;
-+----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                ;
++----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------+-------------+--------------+
+; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name           ; Entity Name ; Library Name ;
++----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------+-------------+--------------+
+; |countpro                  ; 194 (164)           ; 64 (42)                   ; 0           ; 0            ; 0       ; 0         ; 14   ; 0            ; |countpro                     ; countpro    ; work         ;
+;    |VidSync_Gen:syncgen|   ; 30 (30)             ; 22 (22)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |countpro|VidSync_Gen:syncgen ; VidSync_Gen ; work         ;
++----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------+-------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
-
-
-+-------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                      ;
-+----------------------------------------+--------------------------------+
-; Register name                          ; Reason for Removal             ;
-+----------------------------------------+--------------------------------+
-; led[2]~reg0                            ; Merged with digit[3][0]        ;
-; count[0]                               ; Merged with dyn_indic_count[0] ;
-; dyn_indic_count[1]                     ; Merged with count[1]           ;
-; dyn_indic_count[2]                     ; Merged with count[2]           ;
-; dyn_indic_count[3]                     ; Merged with count[3]           ;
-; dyn_indic_count[4]                     ; Merged with count[4]           ;
-; dyn_indic_count[5]                     ; Merged with count[5]           ;
-; dyn_indic_count[6]                     ; Merged with count[6]           ;
-; dyn_indic_count[7]                     ; Merged with count[7]           ;
-; dyn_indic_count[8]                     ; Merged with count[8]           ;
-; dyn_indic_count[9]                     ; Merged with count[9]           ;
-; dyn_indic_count[10]                    ; Merged with count[10]          ;
-; dyn_indic_count[11]                    ; Merged with count[11]          ;
-; dyn_indic_count[12]                    ; Merged with count[12]          ;
-; Total Number of Removed Registers = 14 ;                                ;
-+----------------------------------------+--------------------------------+
 
 
 +------------------------------------------------------+
@@ -234,23 +220,39 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 47    ;
+; Total registers                              ; 64    ;
 ; Number of registers using Synchronous Clear  ; 0     ;
 ; Number of registers using Synchronous Load   ; 0     ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 12    ;
+; Number of registers using Clock Enable       ; 39    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                           ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
-; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |countpro|Mux0             ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; boundary_port         ; 14                          ;
+; cycloneiii_ff         ; 64                          ;
+;     ENA               ; 39                          ;
+;     plain             ; 25                          ;
+; cycloneiii_lcell_comb ; 196                         ;
+;     arith             ; 93                          ;
+;         2 data inputs ; 46                          ;
+;         3 data inputs ; 47                          ;
+;     normal            ; 103                         ;
+;         0 data inputs ; 6                           ;
+;         1 data inputs ; 7                           ;
+;         2 data inputs ; 13                          ;
+;         3 data inputs ; 12                          ;
+;         4 data inputs ; 65                          ;
+;                       ;                             ;
+; Max LUT depth         ; 7.20                        ;
+; Average LUT depth     ; 4.00                        ;
++-----------------------+-----------------------------+
 
 
 +-------------------------------+
@@ -258,7 +260,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:00     ;
+; Top            ; 00:00:02     ;
 +----------------+--------------+
 
 
@@ -266,54 +268,51 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Analysis & Synthesis Messages ;
 +-------------------------------+
 Info: *******************************************************************
-Info: Running Quartus II 32-bit Analysis & Synthesis
-    Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Copyright (C) 1991-2013 Altera Corporation. All rights reserved.
-    Info: Your use of Altera Corporation's design tools, logic functions 
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 17.0.0 Build 595 04/25/2017 SJ Lite Edition
+    Info: Copyright (C) 2017  Intel Corporation. All rights reserved.
+    Info: Your use of Intel Corporation's design tools, logic functions 
     Info: and other software and tools, and its AMPP partner logic 
     Info: functions, and any output files from any of the foregoing 
     Info: (including device programming or simulation files), and any 
     Info: associated documentation or information are expressly subject 
-    Info: to the terms and conditions of the Altera Program License 
-    Info: Subscription Agreement, Altera MegaCore Function License 
-    Info: Agreement, or other applicable license agreement, including, 
-    Info: without limitation, that your use is for the sole purpose of 
-    Info: programming logic devices manufactured by Altera and sold by 
-    Info: Altera or its authorized distributors.  Please refer to the 
-    Info: applicable agreement for further details.
-    Info: Processing started: Sun May  7 00:09:38 2017
+    Info: to the terms and conditions of the Intel Program License 
+    Info: Subscription Agreement, the Intel Quartus Prime License Agreement,
+    Info: the Intel MegaCore Function License Agreement, or other 
+    Info: applicable license agreement, including, without limitation, 
+    Info: that your use is for the sole purpose of programming logic 
+    Info: devices manufactured by Intel and sold by Intel or its 
+    Info: authorized distributors.  Please refer to the applicable 
+    Info: agreement for further details.
+    Info: Processing started: Thu May 25 02:45:41 2017
 Info: Command: quartus_map --read_settings_files=on --source=../fpga/countpro.v Example
-Warning (20028): Parallel compilation is not licensed and has been disabled
-Info (12021): Found 1 design units, including 1 entities, in source file /home/edos/localGIT/Altera-Makefile/fpga/countpro.v
-    Info (12023): Found entity 1: countpro
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
+Info (12021): Found 2 design units, including 2 entities, in source file /home/k33p/Project/Altera-Makefile/7segment/fpga/countpro.v
+    Info (12023): Found entity 1: countpro File: /home/k33p/Project/Altera-Makefile/7segment/fpga/countpro.v Line: 3
+    Info (12023): Found entity 2: VidSync_Gen File: /home/k33p/Project/Altera-Makefile/7segment/fpga/countpro.v Line: 128
 Info (12127): Elaborating entity "countpro" for the top level hierarchy
-Warning (10230): Verilog HDL assignment warning at countpro.v(16): truncated value with size 32 to match size of target (17)
-Warning (10230): Verilog HDL assignment warning at countpro.v(22): truncated value with size 32 to match size of target (4)
-Warning (10230): Verilog HDL assignment warning at countpro.v(26): truncated value with size 32 to match size of target (4)
-Warning (10230): Verilog HDL assignment warning at countpro.v(30): truncated value with size 32 to match size of target (4)
-Warning (10230): Verilog HDL assignment warning at countpro.v(32): truncated value with size 32 to match size of target (4)
-Warning (10230): Verilog HDL assignment warning at countpro.v(47): truncated value with size 32 to match size of target (13)
-Warning (10230): Verilog HDL assignment warning at countpro.v(76): truncated value with size 32 to match size of target (2)
-Warning (10034): Output port "led[0]" at countpro.v(5) has no driver
-Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "led[0]" is stuck at GND
-Info (144001): Generated suppressed messages file /home/edos/localGIT/Altera-Makefile/quartus/Example.map.smsg
+Warning (10230): Verilog HDL assignment warning at countpro.v(37): truncated value with size 32 to match size of target (10) File: /home/k33p/Project/Altera-Makefile/7segment/fpga/countpro.v Line: 37
+Warning (10230): Verilog HDL assignment warning at countpro.v(42): truncated value with size 32 to match size of target (10) File: /home/k33p/Project/Altera-Makefile/7segment/fpga/countpro.v Line: 42
+Warning (10230): Verilog HDL assignment warning at countpro.v(93): truncated value with size 32 to match size of target (10) File: /home/k33p/Project/Altera-Makefile/7segment/fpga/countpro.v Line: 93
+Warning (10230): Verilog HDL assignment warning at countpro.v(99): truncated value with size 32 to match size of target (9) File: /home/k33p/Project/Altera-Makefile/7segment/fpga/countpro.v Line: 99
+Warning (10230): Verilog HDL assignment warning at countpro.v(103): truncated value with size 32 to match size of target (10) File: /home/k33p/Project/Altera-Makefile/7segment/fpga/countpro.v Line: 103
+Info (12128): Elaborating entity "VidSync_Gen" for hierarchy "VidSync_Gen:syncgen" File: /home/k33p/Project/Altera-Makefile/7segment/fpga/countpro.v Line: 26
+Warning (10230): Verilog HDL assignment warning at countpro.v(144): truncated value with size 32 to match size of target (10) File: /home/k33p/Project/Altera-Makefile/7segment/fpga/countpro.v Line: 144
+Warning (10230): Verilog HDL assignment warning at countpro.v(147): truncated value with size 32 to match size of target (9) File: /home/k33p/Project/Altera-Makefile/7segment/fpga/countpro.v Line: 147
+Info (286030): Timing-Driven Synthesis is running
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 84 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 2 input pins
-    Info (21059): Implemented 14 output pins
-    Info (21061): Implemented 68 logic cells
-Info: Quartus II 32-bit Analysis & Synthesis was successful. 0 errors, 11 warnings
-    Info: Peak virtual memory: 341 megabytes
-    Info: Processing ended: Sun May  7 00:09:39 2017
-    Info: Elapsed time: 00:00:01
-    Info: Total CPU time (on all processors): 00:00:01
-
-
-+------------------------------------------+
-; Analysis & Synthesis Suppressed Messages ;
-+------------------------------------------+
-The suppressed messages can be found in /home/edos/localGIT/Altera-Makefile/quartus/Example.map.smsg.
+Warning (21074): Design contains 1 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "btns[2]" File: /home/k33p/Project/Altera-Makefile/7segment/fpga/countpro.v Line: 10
+Info (21057): Implemented 208 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 5 input pins
+    Info (21059): Implemented 9 output pins
+    Info (21061): Implemented 194 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 10 warnings
+    Info: Peak virtual memory: 949 megabytes
+    Info: Processing ended: Thu May 25 02:46:33 2017
+    Info: Elapsed time: 00:00:52
+    Info: Total CPU time (on all processors): 00:01:04
 
 

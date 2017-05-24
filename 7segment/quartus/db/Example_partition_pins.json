@@ -1,0 +1,61 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "VGA_RED",
+					"strict" : false
+				},
+				{
+					"name" : "VGA_GREEN",
+					"strict" : false
+				},
+				{
+					"name" : "VGA_BLUE",
+					"strict" : false
+				},
+				{
+					"name" : "VGA_HSYNC",
+					"strict" : false
+				},
+				{
+					"name" : "VGA_VSYNC",
+					"strict" : false
+				},
+				{
+					"name" : "leds[0]",
+					"strict" : false
+				},
+				{
+					"name" : "leds[1]",
+					"strict" : false
+				},
+				{
+					"name" : "leds[2]",
+					"strict" : false
+				},
+				{
+					"name" : "leds[3]",
+					"strict" : false
+				},
+				{
+					"name" : "btns[0]",
+					"strict" : false
+				},
+				{
+					"name" : "btns[1]",
+					"strict" : false
+				},
+				{
+					"name" : "btns[3]",
+					"strict" : false
+				},
+				{
+					"name" : "CLK_50MHZ",
+					"strict" : false
+				}
+			]
+		}
+	]
+}
